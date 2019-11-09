@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    environment:
+      - APACHE_RUN_USER=#1000
+    volumes:
+      - ${FRONTEND_PATH_HOST}:${FRONTEND_PATH_CONTSINER}
+    ports:
+      - 3000:3000
+    working_dir: ${FRONTEND_PATH_CONTSINER}
+    command: npm run start
+
+  redis:
+    image: "redis:alpine"
+
+  backend:
+    build: ./api
+    environment:
+      - APACHE_RUN_USER=#1000
+    volumes:
+      - ${BACKEND_PATH_HOST}:${BACKEND_PATH_CONTSINER}
+    ports:
+      - 9000:9000
+    working_dir: ${BACKEND_PATH_CONTSINER}
+    command: npm run start
