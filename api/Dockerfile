@@ -1,6 +1,4 @@
-FROM node:10
+FROM node:10-alpine
+WORKDIR /var/www/api
 
-EXPOSE 8081
-
-RUN npm install \
-    npm run dev
+RUN npm -v

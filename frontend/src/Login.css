@@ -1,0 +1,21 @@
+.login-form__input, .login-form__btn {
+    padding: 5px;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.login-form__btn {
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #f39c12;
+    text-transform: uppercase;
+    color: whitesmoke;
+    line-height: 1.6;
+}
+
+.login-form__btn:hover {
+    background-color: #F3C018;
+}
+

@@ -13,6 +13,16 @@ class App extends Component {
     render() {
         return (
             <Router>
+                <header>
+                    <ul>
+                        <Link to="/home">
+                            <li>Home</li>
+                        </Link>
+                        <Link to="/login">
+                            <li>Login</li>
+                        </Link>
+                    </ul>
+                </header>
                 <div className="App">
                     <Switch>
                         <Route path="/home">

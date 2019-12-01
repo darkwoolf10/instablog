@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+  padding: 0;
+}
 .App {
   text-align: center;
 }
@@ -6,7 +10,7 @@
   height: 40vmin;
 }
 
-.App-header {
+.App {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -19,4 +23,23 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+header {
+  height: 100%;
+  background-color: #9932CC;
+}
+
+header ul {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+header ul li {
+  list-style: none;
+  padding: 20px;
+  color: #F5F5F5;
+  background-color: #800080;
+  border-right: 1px solid beige;
 }

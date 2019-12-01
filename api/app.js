@@ -47,12 +47,12 @@ app.use(function(err, req, res, next) {
 });
 
 app.use(session({
-  store: new RedisStore({
-    url: config.redisStore.url
-  }),
-  secret: config.redisStore.secret,
-  resave: false,
-  saveUninitialized: false
+  // store: new RedisStore({
+  //   url: config.redisStore.url
+  // }),
+  // secret: config.redisStore.secret,
+  // resave: false,
+  // saveUninitialized: false
 }));
 
 app.use(passport.initialize());

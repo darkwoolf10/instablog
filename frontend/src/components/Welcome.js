@@ -16,13 +16,13 @@ class Welcome extends Component {
             .catch(err => err);
     }
 
-    componentWillMount() {
+    UNSAFE_componentWillMount() {
         this.callAPI();
     }
 
     render() {
         return (
-            <main className="App-header">
+            <main className="App">
                 <img src={logo} className="App-logo" alt="logo"/>
                 <h1 className="App-title">Welcome to React</h1>
                 <p className="App-intro">{this.state.apiResponse}</p>

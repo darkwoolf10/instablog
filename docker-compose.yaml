@@ -6,10 +6,9 @@ services:
     environment:
       - APACHE_RUN_USER=#1000
     volumes:
-      - ${FRONTEND_PATH_HOST}:${FRONTEND_PATH_CONTSINER}
+      - ./frontend:/var/www/frontend
     ports:
       - 3000:3000
-    working_dir: ${FRONTEND_PATH_CONTSINER}
     command: npm run start
 
   redis:
@@ -20,8 +19,7 @@ services:
     environment:
       - APACHE_RUN_USER=#1000
     volumes:
-      - ${BACKEND_PATH_HOST}:${BACKEND_PATH_CONTSINER}
+      - ./api:/var/www/api
     ports:
       - 9000:9000
-    working_dir: ${BACKEND_PATH_CONTSINER}
     command: npm run start
