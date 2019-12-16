@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import Login from "./components/Login";
+import CreatePhoto from "./components/CreatePhoto";
+import Gallery from "./components/Gallery/Gallery";
 import Welcome from "./components/Welcome";
 import {
     BrowserRouter as Router,
@@ -18,8 +19,14 @@ class App extends Component {
                         <Link to="/home">
                             <li>Home</li>
                         </Link>
-                        <Link to="/login">
-                            <li>Login</li>
+                        {/*<Link to="/login">*/}
+                        {/*    <li>Login</li>*/}
+                        {/*</Link>*/}
+                        <Link to="/create-photo">
+                            <li>Create Photo</li>
+                        </Link>
+                        <Link to="/gallery">
+                            <li>Gallery</li>
                         </Link>
                     </ul>
                 </header>
@@ -28,8 +35,14 @@ class App extends Component {
                         <Route path="/home">
                             <Welcome />
                         </Route>
-                        <Route path="/login">
-                            <Login />
+                        {/*<Route path="/login">*/}
+                        {/*    <Login />*/}
+                        {/*</Route>*/}
+                        <Route path="/create-photo">
+                            <CreatePhoto />
+                        </Route>
+                        <Route path="/gallery">
+                            <Gallery />
                         </Route>
                     </Switch>
                 </div>

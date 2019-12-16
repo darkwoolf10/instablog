@@ -1,4 +1,4 @@
 FROM node:10-alpine
 WORKDIR /var/www/api
 
-RUN npm -v
+RUN npm install

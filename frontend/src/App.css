@@ -2,17 +2,10 @@
   margin: 0;
   padding: 0;
 }
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
 
 .App {
+  height: calc(100% - 50px);
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +19,6 @@
 }
 
 header {
-  height: 100%;
   background-color: #9932CC;
 }
 
@@ -37,9 +29,14 @@ header ul {
 }
 
 header ul li {
+  height: 40px;
+  padding: 5px;
   list-style: none;
-  padding: 20px;
   color: #F5F5F5;
   background-color: #800080;
   border-right: 1px solid beige;
+}
+
+.welcome-preview {
+  text-align: center;
 }

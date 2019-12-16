@@ -21,5 +21,5 @@ services:
     volumes:
       - ./api:/var/www/api
     ports:
-      - 9000:9000
+      - 9999:9999
     command: npm run start
