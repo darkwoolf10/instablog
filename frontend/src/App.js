@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import CreatePhoto from "./components/CreatePhoto";
+import CreatePhoto from "./components/CreatePhoto/CreatePhoto";
 import Gallery from "./components/Gallery/Gallery";
 import Welcome from "./components/Welcome";
 import {

@@ -1,25 +1,25 @@
 version: '3'
 
 services:
+  backend:
+    build: ./api
+    environment:
+      - APACHE_RUN_USER=#1000
+    volumes:
+      - ${BACKEND_PATH_HOST}:/var/www/api
+    ports:
+      - 9000:9000
+    command: npm run start
+
   frontend:
     build: ./frontend
     environment:
       - APACHE_RUN_USER=#1000
     volumes:
-      - ./frontend:/var/www/frontend
+      - ${FRONTEND_PATH_HOST}:/var/www/frontend
     ports:
       - 3000:3000
     command: npm run start
 
   redis:
     image: "redis:alpine"
-
-  backend:
-    build: ./api
-    environment:
-      - APACHE_RUN_USER=#1000
-    volumes:
-      - ./api:/var/www/api
-    ports:
-      - 9999:9999
-    command: npm run start

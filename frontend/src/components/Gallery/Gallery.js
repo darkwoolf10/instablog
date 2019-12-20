@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./Gallery.css";
+import "./Gallery.sass";
 
 export default class Gallery extends Component {
   constructor(props) {
@@ -7,15 +7,11 @@ export default class Gallery extends Component {
     this.state = {apiResponse: ""};
   }
 
-  callAPI() {
-    fetch("http://localhost:9999/gallery")
-      .then(res => res.text())
-      .then(res => this.setState({apiResponse: res}))
-      .catch(err => err);
-  }
-
   UNSAFE_componentWillMount() {
-    this.callAPI();
+    fetch("http://localhost:9000/gallery")
+        .then(res => res.text())
+        .then(res => this.setState({apiResponse: res}))
+        .catch(err => err);
   }
 
   render() {

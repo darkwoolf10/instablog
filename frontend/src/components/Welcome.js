@@ -8,15 +8,11 @@ class Welcome extends Component {
     this.state = {apiResponse: ""};
   }
 
-  callAPI() {
-    fetch("http://localhost:9999/testAPI")
-      .then(res => res.text())
-      .then(res => this.setState({apiResponse: res}))
-      .catch(err => err);
-  }
-
   UNSAFE_componentWillMount() {
-    this.callAPI();
+    fetch("http://localhost:9000/testAPI")
+        .then(res => res.text())
+        .then(res => this.setState({apiResponse: res}))
+        .catch(err => err);
   }
 
   render() {

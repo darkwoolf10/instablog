@@ -40,3 +40,7 @@ header ul li {
 .welcome-preview {
   text-align: center;
 }
+
+.ml-xs {
+  margin-left: 3px;
+}

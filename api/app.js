@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require("cors");
 
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended: true}));
 
 const passport = require('passport');
 const session = require('express-session');
@@ -16,7 +16,7 @@ const redisStore = require('connect-redis')(session);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const testAPIRouter = require("./routes/testAPI");
-const galleryRoute = require("./routes/galleryRoute");
+const galleryRoute = require("./routes/gallery");
 
 const app = express();
 
