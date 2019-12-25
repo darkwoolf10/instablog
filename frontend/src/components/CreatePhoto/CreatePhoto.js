@@ -3,31 +3,48 @@ import "./CreatePhoto.sass";
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import axios from 'axios';
 
 export default class CreatePhoto extends Component {
   constructor(props) {
     super(props);
-    this.state = {description: ''};
+    this.state = {
+      description: '',
+      photo: ''
+    };
+  };
 
-    this.setDescription = this.setDescription.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  setDescription(event) {
+  setDescription = (event) => {
     this.setState({description: event.target.value});
-  }
+  };
 
-  handleSubmit(event) {
+  setPhoto = (event) => {
+    this.setState({photo: event.target.files[0]});
+  };
+
+  handleSubmit = (event) => {
     event.preventDefault();
-    alert('A name was submitted: ' + this.state.description);
-  }
+    let data = new FormData();
+    data.append('photo', this.state.photo);
+    data.append('description', this.state.description);
+
+    const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+    axios.post('http://localhost:9000/photo/upload', data, config)
+      .then(response => {
+        console.log(response)
+      })
+  };
 
   render() {
     return (
       <form method='POST' encType="multipart/form-data" className="create-photo">
-        <Button variant="contained" startIcon={<CloudUploadIcon />} className="create-photo__input create-photo__btn">
+        <Button variant="contained"
+                component="label"
+                startIcon={<CloudUploadIcon />}
+                className="create-photo__input create-photo__btn">
           Upload File
-          <input type="file" style={{ display: "none" }} />
+          <input type="file" onChange={this.setPhoto} style={{ display: "none" }} />
         </Button>
         <TextField
             id="standard-basic"

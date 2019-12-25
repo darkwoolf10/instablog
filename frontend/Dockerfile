@@ -1,5 +1,3 @@
-FROM node:10-alpine
+FROM node:12-alpine
 
 WORKDIR /var/www/frontend
-
-RUN npm install
