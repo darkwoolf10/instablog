@@ -1,34 +1,49 @@
-import React, {Component, useEffect, useState} from "react";
+import React, {Component} from "react";
 import "./Gallery.sass";
+import axios from 'axios';
 
- const Gallery = () => {
-  const [gallery, setGallery] = useState([]);
+export default class Gallery extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gallery: []
+    };
 
-  useEffect(() => {
-    fetch("http://localhost:9000/gallery")
-        .then(res => res.text())
-        .then(pictures => setGallery(JSON.parse(pictures)))
-        .catch(err => err);
-  }, []);
+    axios.get('http://localhost:9000/gallery')
+      .then(response => this.setState({gallery: response.data}))
+      .catch(err => err);
+  };
 
+  deletePhoto = (picture) => {
+    this.state.gallery.forEach((current, index) => {
+      if (current._id === picture._id) {
+        this.state.gallery.splice(index, 1);
+        this.setState({gallery: this.state.gallery});
+      }
+    });
+    axios.post('http://localhost:9000/photo/delete', {
+      id: picture._id
+    })
+      .then(() => console.log("Delete item"))
+      .catch(err => err);
+  };
 
-   console.log(gallery);
-
-   return (
+  render() {
+    return (
       <div className='gallery'>
-        {gallery.map(picture => {
+        {this.state.gallery.map(picture => {
           return (
-              <div className='picture'>
+            <div className='picture' key={picture._id}>
 
-                  <img src={picture.url} alt=""/>
-                  <p>
-                    {picture.description}
-                  </p>
+              <img src={picture.url} alt=""/>
+              <div>
+                {picture.description}
+                <p onClick={() => {this.deletePhoto(picture)}} className="picture__delete-btn">x</p>
               </div>
+            </div>
           )
         })}
       </div>
     );
+  }
 }
-
-export default Gallery;

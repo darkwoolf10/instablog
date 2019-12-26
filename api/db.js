@@ -1,14 +1,8 @@
-let mysql = require('mysql');
+const mongoose = require('mongoose');
 
-let connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '12345678',
-  database : 'instablog'
-});
-
-connection.connect(function(err) {
-  // if (err) throw err;
-});
+mongoose.connect('mongodb://localhost:27017/instablog', { useNewUrlParser: true });
+const connection = mongoose.connection;
+connection.on('error', (error) => console.error(error));
+connection.once('open', () => console.log('connected to database'));
 
 module.exports = connection;

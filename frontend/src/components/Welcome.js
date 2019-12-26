@@ -6,13 +6,11 @@ class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state = {apiResponse: ""};
-  }
 
-    getDerivedStateFromProps() {
     fetch("http://localhost:9000/testAPI")
-        .then(res => res.text())
-        .then(res => this.setState({apiResponse: res}))
-        .catch(err => err);
+      .then(res => res.text())
+      .then(res => this.setState({apiResponse: res}))
+      .catch(err => err);
   }
 
   render() {

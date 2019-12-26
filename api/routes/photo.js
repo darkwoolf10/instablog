@@ -2,6 +2,10 @@ const express = require('express');
 const connection = require('../db');
 const router = express.Router();
 const multer = require('multer');
+const Photo = require('../models/photo');
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -14,7 +18,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post('/upload', upload.single('photo'), (req, res, next) => {
+router.post('/upload', upload.single('photo'), async (req, res, next) => {
   const file = req.file;
 
   if (!file) {
@@ -23,22 +27,33 @@ router.post('/upload', upload.single('photo'), (req, res, next) => {
     return next(error);
   }
 
-  res.send(file);
+  try {
+    const photo = new Photo({
+      url: 'http://localhost:9000/static/uploads/' + file.filename,
+      description: req.body.description
+    });
+
+    const newPhoto = await photo.save();
+    res.status(201).json(newPhoto)
+  } catch (err) {
+    res.status(400).json({ message: err.message })
+  }
 });
 
+router.post('/delete', async (req, res) => {
+  try {
+    const photo = await Photo.find({ '_id':  req.body.id}).remove().exec();
+    res.send('Photo deleted');
+  } catch (err) {
+    res.status(500).json({ message: err.message })
+  }
+});
 
-// app.get('/photo/:id', (req, res) => {
-//   var filename = req.params.id;
-//
-//   db.collection('mycollection').findOne({'_id': ObjectId(filename) }, (err, result) => {
-//
-//     if (err) return console.log(err)
-//
-//     res.contentType('image/jpeg');
-//     res.send(result.image.buffer)
-//
-//
-//   })
-// })
+router.get('/:id', (req, res) => {
+  const filename = req.params.id;
+  const img = fs.readFileSync();
+  res.writeHead(200, {'Content-Type': 'image/gif' });
+  res.send(img, 'binary');
+});
 
 module.exports = router;
