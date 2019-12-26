@@ -1,24 +1,34 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import "./Gallery.sass";
 
-export default class Gallery extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {apiResponse: ""};
-  }
+ const Gallery = () => {
+  const [gallery, setGallery] = useState([]);
 
-  UNSAFE_componentWillMount() {
+  useEffect(() => {
     fetch("http://localhost:9000/gallery")
         .then(res => res.text())
-        .then(res => this.setState({apiResponse: res}))
+        .then(pictures => setGallery(JSON.parse(pictures)))
         .catch(err => err);
-  }
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <p>Gallery</p>
+
+   console.log(gallery);
+
+   return (
+      <div className='gallery'>
+        {gallery.map(picture => {
+          return (
+              <div className='picture'>
+
+                  <img src={picture.url} alt=""/>
+                  <p>
+                    {picture.description}
+                  </p>
+              </div>
+          )
+        })}
       </div>
     );
-  }
 }
+
+export default Gallery;

@@ -26,4 +26,19 @@ router.post('/upload', upload.single('photo'), (req, res, next) => {
   res.send(file);
 });
 
+
+// app.get('/photo/:id', (req, res) => {
+//   var filename = req.params.id;
+//
+//   db.collection('mycollection').findOne({'_id': ObjectId(filename) }, (err, result) => {
+//
+//     if (err) return console.log(err)
+//
+//     res.contentType('image/jpeg');
+//     res.send(result.image.buffer)
+//
+//
+//   })
+// })
+
 module.exports = router;

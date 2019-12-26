@@ -1,0 +1,14 @@
+$photo-min-width: 360px
+$photo-max-width: 380px
+
+.gallery
+  display: grid
+  grid: repeat(auto-fill, minmax($photo-min-width, $photo-max-width)) / repeat(auto-fill, minmax($photo-min-width, $photo-max-width))
+  grid-gap: 40px
+  place-content: center
+  width: 100%
+  height: 100%
+
+.picture
+  display: flex
+  flex-direction: column

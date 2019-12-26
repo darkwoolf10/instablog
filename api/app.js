@@ -9,6 +9,18 @@ const cors = require("cors");
 
 const passport = require('passport');
 const session = require('express-session');
+
+const MongoClient = require('mongodb').MongoClient;
+const myurl = 'mongodb://localhost:27017';
+
+MongoClient.connect(myurl, (err, client) => {
+  if (err) return console.log(err);
+  db = client.db('test');
+  app.listen(3000, () => {
+    console.log('listening on 3000')
+  })
+});
+
 // const redisStore = require('connect-redis')(session);
 
 const app = express();
@@ -27,17 +39,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-const testAPIRouter = require("./routes/testAPI");
-const galleryRoute = require("./routes/gallery");
-const photo = require("./routes/photo");
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use("/testAPI", testAPIRouter);
-app.use('/gallery', galleryRoute);
-app.use('/photo', photo);
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use("/testAPI", require("./routes/testAPI"));
+app.use('/gallery', require("./routes/gallery"));
+app.use('/photo', require("./routes/photo"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -4,7 +4,7 @@
 }
 
 .App {
-  height: calc(100% - 50px);
+  min-height: calc(100% - 50px);
   background-color: #282c34;
   display: flex;
   flex-direction: column;
